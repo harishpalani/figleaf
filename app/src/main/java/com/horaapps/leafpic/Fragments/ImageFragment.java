@@ -1,34 +1,19 @@
 package com.horaapps.leafpic.Fragments;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.signature.MediaStoreSignature;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.horaapps.leafpic.Base.Media;
 import com.horaapps.leafpic.utils.Measure;
-import com.koushikdutta.async.future.Cancellable;
-import com.koushikdutta.async.future.Future;
-import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.horaapps.leafpic.PhotoPagerActivity;
-import com.koushikdutta.ion.future.ImageViewFuture;
-
-import java.util.concurrent.ExecutionException;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -72,7 +57,7 @@ public class ImageFragment extends Fragment {
 
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getContext());
         PhotoView photoView = new PhotoView(getContext());
-        final SubsamplingScaleImageView imageView =  new SubsamplingScaleImageView(getContext());
+        final SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
 
         if (SP.getBoolean("set_delay_full_image", true) && img.isMediainStorage()) {
             Ion.with(getContext())
@@ -93,7 +78,7 @@ public class ImageFragment extends Fragment {
                 }
             });
             photoView.setZoomTransitionDuration(375);
-            photoView.setScaleLevels(1.0F, 4.5F, 10.0F);//TODO improve
+            photoView.setScaleLevels(1.0F, 4.5F, 10.0F); // TODO: improve
 
         /*Ion.with(getContext())
                 .load(img.getPath())
@@ -137,20 +122,20 @@ public class ImageFragment extends Fragment {
     public void rotatePicture(int rotation) {
         View view = getView();
         if (view.getClass().equals(SubsamplingScaleImageView.class)) {
-            int orienatation = Measure.rotateBy(img.getOrientation(),rotation);
-            if(img.setOrientation(orienatation))
+            int orienatation = Measure.rotateBy(img.getOrientation(), rotation);
+            if (img.setOrientation(orienatation))
                 ((SubsamplingScaleImageView) view).setOrientation(orienatation);
         } else {
-                int orienatation = Measure.rotateBy(img.getOrientation(),rotation);
+            int orienatation = Measure.rotateBy(img.getOrientation(), rotation);
             //((ImageView) view).setRotation(orienatation);
-               ((PhotoView) view).setRotationBy(rotation);
-                if (orienatation==0)
-                    ((PhotoView) view).setMinimumScale(1.0F);
-                else
-                    ((PhotoView) view).setMinimumScale(0.65F);
-                //photoView.setRotationBy(rotation);
-                //photoView.refreshDrawableState();
-                //photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            ((PhotoView) view).setRotationBy(rotation);
+            if (orienatation == 0)
+                ((PhotoView) view).setMinimumScale(1.0F);
+            else
+                ((PhotoView) view).setMinimumScale(0.65F);
+            //photoView.setRotationBy(rotation);
+            //photoView.refreshDrawableState();
+            //photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
     }
 }

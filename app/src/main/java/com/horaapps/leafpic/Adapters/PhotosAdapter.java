@@ -36,22 +36,26 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder
     private View.OnClickListener mOnClickListener;
     private View.OnLongClickListener mOnLongClickListener;
 
-    public PhotosAdapter(ArrayList<Media> ph , Context context) {
+    public PhotosAdapter(ArrayList<Media> ph, Context context) {
         medias = ph;
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(context);
         updatePlaceholder(context, SP.getInt("basic_theme", ThemedActivity.LIGHT_THEME));
     }
 
     public void updatePlaceholder(Context context, int theme) {
-        switch (theme){
+        switch (theme) {
             case ThemedActivity.DARK_THEME:
                 drawable = ((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_empty));
                 break;
-            case ThemedActivity.AMOLED_THEME: drawable = null; break;
-            case ThemedActivity.LIGHT_THEME: default:
+            case ThemedActivity.AMOLED_THEME:
+                drawable = null;
+                break;
+            case ThemedActivity.LIGHT_THEME:
+            default:
                 drawable = ((BitmapDrawable) ContextCompat.getDrawable(context, R.drawable.ic_empty_white));
                 break;
         }
+
     }
 
     @Override
@@ -113,11 +117,12 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder
         if (f.isSelected()) {
             holder.selectHolder.setVisibility(View.VISIBLE);
             holder.imageView.setColorFilter(0x88000000, PorterDuff.Mode.SRC_ATOP);
-            holder.imageView.setPadding(15,15,15,15);
+            holder.imageView.setPadding(15, 15, 15, 15);
         } else {
             holder.selectHolder.setVisibility(View.GONE);
-            holder.imageView.clearColorFilter();
-            holder.imageView.setPadding(0,0,0,0);
+            // holder.imageView.clearColorFilter();
+            // holder.imageView.setColorFilter(Figleaf.NEGATIVE); // HP: invert image colors [insert encryption here] — now taken over
+            holder.imageView.setPadding(0, 0, 0, 0);
         }
     }
 
