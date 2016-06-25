@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.horaapps.leafpic.Base.Media;
+import com.horaapps.leafpic.figleaf.Figleaf;
 import com.horaapps.leafpic.utils.Measure;
 import com.koushikdutta.ion.Ion;
 import com.horaapps.leafpic.PhotoPagerActivity;
@@ -58,6 +59,8 @@ public class ImageFragment extends Fragment {
         SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getContext());
         PhotoView photoView = new PhotoView(getContext());
         final SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
+
+        photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
 
         if (SP.getBoolean("set_delay_full_image", true) && img.isMediainStorage()) {
             Ion.with(getContext())

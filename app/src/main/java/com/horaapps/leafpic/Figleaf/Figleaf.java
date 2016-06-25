@@ -15,6 +15,6 @@ public class Figleaf {
             0, 0, 0, 1.0f, 0  // alpha
     };
 
-    public static final ColorMatrixColorFilter NEGATIVE = new ColorMatrixColorFilter(NEG_ARRAY);
+    public static final ColorMatrixColorFilter NEGATIVE = new ColorMatrixColorFilter(NEG_ARRAY); // HP: invert negative images — this simulates DECRYPTION // insert decryption mechanism here
 
 }
