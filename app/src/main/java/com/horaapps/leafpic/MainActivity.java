@@ -192,6 +192,11 @@ public class MainActivity extends ThemedActivity {
         editMode = false;
         securityObj = new SecurityHelper(MainActivity.this);
 
+        /*byte[] bytes = getJPEGByteArray();
+        for (byte b : bytes) {
+            Log.i(TAG, "onCreate: Byte -- " + b);
+        }*/
+
         initUI();
         setupUI();
 
@@ -1726,4 +1731,9 @@ public class MainActivity extends ThemedActivity {
             swipeRefreshLayout.setRefreshing(false);
         }
     }
+
+    /*static {
+        System.loadLibrary("figleaf");
+    }
+    public native byte[] getJPEGByteArray();*/
 }

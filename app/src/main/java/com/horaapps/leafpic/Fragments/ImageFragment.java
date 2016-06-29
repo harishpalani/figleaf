@@ -1,9 +1,14 @@
 package com.horaapps.leafpic.Fragments;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,8 @@ import com.horaapps.leafpic.figleaf.Figleaf;
 import com.horaapps.leafpic.utils.Measure;
 import com.koushikdutta.ion.Ion;
 import com.horaapps.leafpic.PhotoPagerActivity;
+
+import java.util.Arrays;
 
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -60,9 +67,17 @@ public class ImageFragment extends Fragment {
         PhotoView photoView = new PhotoView(getContext());
         final SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
 
-        photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
+        // photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
+        byte[] imgByteArray = getJPEGByteArray(Figleaf.convertToByteArray(img));
+        // String toString = Arrays.toString();
+        // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: " + toString);
 
-        if (SP.getBoolean("set_delay_full_image", true) && img.isMediainStorage()) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
+        photoView.setImageBitmap(bitmap);
+        // Drawable d = new BitmapDrawable(getResources(), bitmap);
+        // photoView.setImageDrawable(d);
+
+        if (SP.getBoolean("set_delay_full_image", true) && img.isMediaInStorage()) {
             Ion.with(getContext())
                     .load(img.getPath())
                     .withBitmap()
@@ -74,7 +89,6 @@ public class ImageFragment extends Fragment {
                 public void onPhotoTap(View view, float x, float y) {
                     ((PhotoPagerActivity) getActivity()).toggleSystemUI();
                 }
-
                 @Override
                 public void onOutsidePhotoTap() {
                     ((PhotoPagerActivity) getActivity()).toggleSystemUI();
@@ -83,7 +97,7 @@ public class ImageFragment extends Fragment {
             photoView.setZoomTransitionDuration(375);
             photoView.setScaleLevels(1.0F, 4.5F, 10.0F); // TODO: improve
 
-        /*Ion.with(getContext())
+            /*Ion.with(getContext())
                 .load(img.getPath())
                 .withBitmap()
                 .deepZoom()
@@ -141,4 +155,9 @@ public class ImageFragment extends Fragment {
             //photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }
     }
+
+    static {
+        System.loadLibrary("figleaf");
+    }
+    public native byte[] getJPEGByteArray(byte[] bytes);
 }

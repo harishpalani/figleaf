@@ -111,7 +111,7 @@ public class Media implements Parcelable {
     public boolean isVideo() { return getMIME().startsWith("video"); }
 
     public Uri getUri() {
-        return isMediainStorage() ? Uri.fromFile(new File(path)) : uri;
+        return isMediaInStorage() ? Uri.fromFile(new File(path)) : uri;
     }
 
     public byte[] getThumbnail() {
@@ -194,7 +194,7 @@ public class Media implements Parcelable {
         return false;
     }
 
-    public boolean isMediainStorage() {
+    public boolean isMediaInStorage() {
         return path != null;
     }
 
