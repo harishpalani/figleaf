@@ -67,12 +67,14 @@ public class ImageFragment extends Fragment {
         PhotoView photoView = new PhotoView(getContext());
         final SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
 
-        // photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
+        Log.i(ImageFragment.class.getSimpleName(), "onCreateView: img size #1 -- " + img.getSize());
+
+        photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
         byte[] imgByteArray = getJPEGByteArray(Figleaf.convertToByteArray(img));
         // String toString = Arrays.toString();
         // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: " + toString);
-
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
+        Log.i(ImageFragment.class.getSimpleName(), "onCreateView: bitmap size #2 -- " + bitmap.getByteCount());
         photoView.setImageBitmap(bitmap);
         // Drawable d = new BitmapDrawable(getResources(), bitmap);
         // photoView.setImageDrawable(d);

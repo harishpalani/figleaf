@@ -73,7 +73,7 @@ public class Media implements Parcelable {
     public Media(File file) {
         this.path = file.getAbsolutePath();
         this.dateModified = file.lastModified();
-        this.size = file.length();
+        this.size = file.length(); // file.length() = # of bytes in a file
         setMIME();
     }
 
@@ -157,6 +157,10 @@ public class Media implements Parcelable {
             } catch (Exception e){ e.printStackTrace(); }
         }
     }
+
+    /**
+     * @return # of bytes in the media file
+     */
     public long getSize() {
         return size;
     }
