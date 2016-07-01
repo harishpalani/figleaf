@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.horaapps.leafpic.Base.Media;
+import com.horaapps.leafpic.R;
 import com.horaapps.leafpic.figleaf.Figleaf;
 import com.horaapps.leafpic.utils.Measure;
 import com.koushikdutta.ion.Ion;
@@ -70,12 +71,14 @@ public class ImageFragment extends Fragment {
         Log.i(ImageFragment.class.getSimpleName(), "onCreateView: img size #1 -- " + img.getSize());
 
         photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
-        byte[] imgByteArray = getJPEGByteArray(Figleaf.convertToByteArray(img));
+        byte[] imgByteArray = getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), 1, 64);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
+        photoView.setImageBitmap(bitmap);
         // String toString = Arrays.toString();
         // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: " + toString);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
-        Log.i(ImageFragment.class.getSimpleName(), "onCreateView: bitmap size #2 -- " + bitmap.getByteCount());
-        photoView.setImageBitmap(bitmap);
+        // Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
+        // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: bitmap size #2 -- " + bitmap.getByteCount());
+        // photoView.setImageBitmap(bitmap);
         // Drawable d = new BitmapDrawable(getResources(), bitmap);
         // photoView.setImageDrawable(d);
 
@@ -159,7 +162,8 @@ public class ImageFragment extends Fragment {
     }
 
     static {
+        System.loadLibrary("libjpeg");
         System.loadLibrary("figleaf");
     }
-    public native byte[] getJPEGByteArray(byte[] bytes);
+    public native byte[] getJPEGByteArray(String inputFilename, String outputFilename, String passphrase, int mode, int blockSize);
 }

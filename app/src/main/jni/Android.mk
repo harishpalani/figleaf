@@ -1,5 +1,11 @@
 LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := $(call all-subdir-java-files)
-LOCAL_PACKAGE_NAME := LeafPic
-include $(BUILD_PACKAGE)
+LOCAL_MODULE    := libjpeg
+LOCAL_SRC_FILES := libjpeg.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE    := figleaf
+LOCAL_SRC_FILES := figleaf.a
+include $(PREBUILT_STATIC_LIBRARY)

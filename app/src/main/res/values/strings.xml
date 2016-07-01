@@ -1,4 +1,9 @@
 <resources>
+    <!-- ENCRYPTION STRINGS -->
+    <string name="passphrase">password</string>
+    <string name="encrypt">ENCRYPT</string>
+    <string name="decrypt">DECRYPT</string>
+
     <!--LEAF PIC STRING'S-->
     <string name="app_name">LeafPic</string>
     <string name="app_light_description">A colorful material gallery.</string>
