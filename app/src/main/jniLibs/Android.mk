@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE            := figleaf-prebuilt
-LOCAL_SRC_FILES         := ../figleaf/libfigleaf.so
+LOCAL_SRC_FILES         := libfigleaf.so
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../figleaf
 
 include $(PREBUILT_STATIC_LIBRARY)

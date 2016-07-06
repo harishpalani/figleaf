@@ -149,7 +149,7 @@ public class ImageFragment extends Fragment {
                 ((SubsamplingScaleImageView) view).setOrientation(orienatation);
         } else {
             int orienatation = Measure.rotateBy(img.getOrientation(), rotation);
-            //((ImageView) view).setRotation(orienatation);
+            // ((ImageView) view).setRotation(orienatation);
             ((PhotoView) view).setRotationBy(rotation);
             if (orienatation == 0)
                 ((PhotoView) view).setMinimumScale(1.0F);
