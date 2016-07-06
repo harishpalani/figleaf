@@ -71,7 +71,7 @@ public class ImageFragment extends Fragment {
         Log.i(ImageFragment.class.getSimpleName(), "onCreateView: img size #1 -- " + img.getSize());
 
         photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
-        byte[] imgByteArray = getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), 1, 64);
+        byte[] imgByteArray = getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), Figleaf.DECRYPT, 64);
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
         photoView.setImageBitmap(bitmap);
         // String toString = Arrays.toString();
@@ -162,7 +162,6 @@ public class ImageFragment extends Fragment {
     }
 
     static {
-        System.loadLibrary("libjpeg");
         System.loadLibrary("figleaf");
     }
     public native byte[] getJPEGByteArray(String inputFilename, String outputFilename, String passphrase, int mode, int blockSize);

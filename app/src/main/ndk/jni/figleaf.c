@@ -13,8 +13,7 @@ JNIEXPORT jbyteArray JNICALL Java_com_horaapps_leafpic_Fragments_ImageFragment_g
 */
 #include <jni.h>
 
-extern unsigned char figleaf_process_image(char *input_filename, char *output_filename, char *passphrase,
-                                           int mode, int blocksize);
+extern unsigned char figleaf_process_image(char *input_filename, char *output_filename, char *passphrase, int mode, int blocksize);
 
 JNIEXPORT jbyteArray JNICALL Java_com_horaapps_leafpic_MainActivity_getJPEGByteArray (JNIEnv *env, jobject o) {
     jbyte a[] = {1,2,3,4,5,6};
@@ -23,6 +22,6 @@ JNIEXPORT jbyteArray JNICALL Java_com_horaapps_leafpic_MainActivity_getJPEGByteA
     return ret;
 }
 
-JNIEXPORT unsigned char JNICALL Java_com_horaapps_leafpic_Fragments_ImageFragment_getJPEGByteArray(JNIEnv *env, jobject o, char *input_filename, char *output_filename, char *passphrase, int mode, int blocksize) {
+JNIEXPORT unsigned char JNICALL Java_com_horaapps_leafpic_ImageFragment_getJPEGByteArray (JNIEnv *env, jobject o, char *input_filename, char *output_filename, char *passphrase, int mode, int blocksize) {
     return figleaf_process_image(input_filename, output_filename, passphrase, mode, blocksize);
 }

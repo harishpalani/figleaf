@@ -17,6 +17,10 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class Figleaf {
 
+    // Mechanism constants
+    public static final int ENCRYPT = 0;
+    public static final int DECRYPT = 1;
+
     private static final float[] NEG_ARRAY = {
             -1.0f, 0, 0, 0, 255, // red
             0, -1.0f, 0, 0, 255, // green
