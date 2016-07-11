@@ -34,6 +34,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 @SuppressWarnings("ResourceType")
 public class ImageFragment extends Fragment {
 
+    public static final String TAG = ImageFragment.class.getSimpleName();
     private Media img;
 
     public static ImageFragment newInstance(Media asd) {
@@ -68,16 +69,19 @@ public class ImageFragment extends Fragment {
         PhotoView photoView = new PhotoView(getContext());
         final SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(getContext());
 
-        Log.i(ImageFragment.class.getSimpleName(), "onCreateView: img size #1 -- " + img.getSize());
+        Log.i(TAG, "onCreateView: img size #1 -- " + img.getSize());
 
         photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
-        byte[] imgByteArray = getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), Figleaf.DECRYPT, 64);
+        // byte[] imgByteArray = getJPEGByteArray();
+        byte[] imgByteArray = Figleaf.convertToByteArray(img);
+        // Log.i(TAG, "onCreateView: " + Arrays.toString(getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), Figleaf.DECRYPT, 64))); // HP: NDK test
+        Log.i(TAG, "onCreateView: " + Arrays.toString(getJPEGByteArray())); // HP: NDK test
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
         photoView.setImageBitmap(bitmap);
         // String toString = Arrays.toString();
-        // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: " + toString);
+        // Log.i(TAG, "onCreateView: " + toString);
         // Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
-        // Log.i(ImageFragment.class.getSimpleName(), "onCreateView: bitmap size #2 -- " + bitmap.getByteCount());
+        // Log.i(TAG, "onCreateView: bitmap size #2 -- " + bitmap.getByteCount());
         // photoView.setImageBitmap(bitmap);
         // Drawable d = new BitmapDrawable(getResources(), bitmap);
         // photoView.setImageDrawable(d);
@@ -164,5 +168,5 @@ public class ImageFragment extends Fragment {
     static {
         System.loadLibrary("figleaf");
     }
-    public native byte[] getJPEGByteArray(String inputFilename, String outputFilename, String passphrase, int mode, int blockSize);
+    public native byte[] getJPEGByteArray(); // String inputFilename, String outputFilename, String passphrase, int mode, int blocksize);
 }
