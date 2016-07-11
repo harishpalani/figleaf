@@ -1731,9 +1731,4 @@ public class MainActivity extends ThemedActivity {
             swipeRefreshLayout.setRefreshing(false);
         }
     }
-
-    /*static {
-        System.loadLibrary("figleaf");
-    }
-    public native byte[] getJPEGByteArray();*/
 }
