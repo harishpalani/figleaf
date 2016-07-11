@@ -46,6 +46,7 @@ android {
         }
     }
 }*/
+
 apply plugin: 'com.android.model.application'
 
 repositories {
@@ -55,16 +56,6 @@ repositories {
 }
 
 model {
-    repositories {
-        libs(PrebuiltLibraries) {
-            figleaf {
-                headers.srcDir "src/main/jniLibs"
-                binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("src/main/jniLibs/${targetPlatform.getName()}/libfigleaf.so")
-                }
-            }
-        }
-    }
     android {
         compileSdkVersion 23
         buildToolsVersion "23.0.3"
@@ -76,14 +67,14 @@ model {
             versionCode 1
             versionName "1.0"
         }
-        ndk {
-            moduleName "figleaf"
-        }
         buildTypes {
             release {
                 minifyEnabled false
-                proguardFiles.add(file('proguard-rules.txt'))
+                proguardFiles.add(file('proguard-android.txt'))
             }
+        }
+        ndk {
+            moduleName "figleaf"
         }
     }
 }
