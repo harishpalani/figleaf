@@ -1,4 +1,6 @@
 #include <jni.h>
+#include <../../../prebuild/include/jpeglib.h>
+#include <../../../prebuild/include/turbojpeg.h>
 
 JNIEXPORT jbyteArray JNICALL Java_com_horaapps_leafpic_Fragments_ImageFragment_getJPEGByteArray(JNIEnv *env, jobject o) {
     jbyte a[] = {1,2,3,4,5,6};
