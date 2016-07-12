@@ -44,5 +44,4 @@ public class Figleaf {
         media.getBitmap().compress(Bitmap.CompressFormat.JPEG, 90, stream);
         return stream.toByteArray();
     }
-
 }

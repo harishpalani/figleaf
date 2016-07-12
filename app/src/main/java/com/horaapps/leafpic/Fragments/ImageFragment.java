@@ -71,11 +71,11 @@ public class ImageFragment extends Fragment {
 
         Log.i(TAG, "onCreateView: img size #1 -- " + img.getSize());
 
-        photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
+        // photoView.setColorFilter(Figleaf.NEGATIVE); // HP: "DECRYPTION" mechanism is called here! | negates inverted image, making it positive
         // byte[] imgByteArray = getJPEGByteArray();
         byte[] imgByteArray = Figleaf.convertToByteArray(img);
         // Log.i(TAG, "onCreateView: " + Arrays.toString(getJPEGByteArray(img.getPath(), img.getPath(), getContext().getString(R.string.passphrase), Figleaf.DECRYPT, 64))); // HP: NDK test
-        Log.i(TAG, "onCreateView: " + Arrays.toString(getJPEGByteArray())); // HP: NDK test
+        Log.i(TAG, "onCreateView: " + Arrays.toString(getDCTCoefficients(img.getPath()))); // HP: NDK test
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteArray , 0, imgByteArray.length);
         photoView.setImageBitmap(bitmap);
         // String toString = Arrays.toString();
@@ -168,5 +168,5 @@ public class ImageFragment extends Fragment {
     static {
         System.loadLibrary("figleaf");
     }
-    public native byte[] getJPEGByteArray(); // String inputFilename, String outputFilename, String passphrase, int mode, int blocksize);
+    public native byte[] getDCTCoefficients(String path); // String inputFilename, String outputFilename, String passphrase, int mode, int blocksize);
 }
