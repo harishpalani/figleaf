@@ -1,2 +1,10 @@
-/home/harish/Workspace/Figleaf/LeafPic/app/src/main/obj/local/x86/objs/figleaf/figleaf.o: \
- /home/harish/Workspace/Figleaf/LeafPic/app/src/main/jni/figleaf.c
+obj/local/x86/objs/figleaf/figleaf.o: jni/figleaf.c \
+ jni/../../../prebuild/include/jpeglib.h \
+ jni/../../../prebuild/include/jconfig.h \
+ jni/../../../prebuild/include/jmorecfg.h
+
+jni/../../../prebuild/include/jpeglib.h:
+
+jni/../../../prebuild/include/jconfig.h:
+
+jni/../../../prebuild/include/jmorecfg.h:
